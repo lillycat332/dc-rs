@@ -1,3 +1,7 @@
+[dependencies]
+config = {version = "0.13.1", optional = true}
+directories = {version = "4.0.1", optional = true}
+
 [package]
 name = "dc-ock"
 version = "0.3.0"
@@ -9,8 +13,13 @@ repository = "https://github.com/lillycat332/dc-rs"
 authors = ["Lilly Cham"]
 homepage = "https://haskell.gay"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "dc_ock"
 
-[dependencies]
-config = "0.13.1"
-directories = "4.0.1"
+
+[features]
+bbin = ["config", "directories"]
+
+[[bin]]
+name = "dc-cli"
+required_features = ["bbin"]
