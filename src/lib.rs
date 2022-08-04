@@ -1,5 +1,4 @@
 use std::collections::VecDeque;
-
 use CalcType::{Add, Divide, Multiply, Power, Print, Subtract, Val};
 #[derive(Clone, Copy, PartialEq, PartialOrd, Debug)]
 /// enum CalcType is a type containing operations used in the calculator.
@@ -13,6 +12,7 @@ pub enum CalcType {
     Val(f64),
 }
 
+/// str_to_calc_type converts a string to an optional `CalcType`.
 pub fn str_to_calc_type(string: &str) -> Option<CalcType> {
     let as_int = string.parse::<f64>();
     let result = match as_int {
@@ -36,6 +36,8 @@ pub fn str_to_calc_type(string: &str) -> Option<CalcType> {
     }
 }
 
+/// `eval` takes a `&str` and a `&mut VecDeque<f64>`, evaluates the expression,
+/// and prints the result, pushing the results onto the stack.
 pub fn eval(input: &str, stack: &mut VecDeque<f64>) {
     //// Create a mutable copy of the inputted stack
     //// let mut stack = stack_in.clone();

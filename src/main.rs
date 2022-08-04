@@ -1,14 +1,20 @@
-use config::Config;
+mod internal;
+
 use dc_ock::eval;
+<<<<<<< HEAD
 use directories::ProjectDirs;
 use std::collections::HashMap;
 use std::fs;
+=======
+use internal::get_config;
+>>>>>>> 546ff34 (move config into internal module)
 use std::{
     collections::VecDeque,
     io::{self, stdin, stdout},
     process::exit,
 };
 
+<<<<<<< HEAD
 fn get_config() -> HashMap<String, String> {
     // Construct the path to the configuration folder
     let binding = ProjectDirs::from("com", "lc332", "dc_rs").unwrap();
@@ -28,6 +34,8 @@ fn get_config() -> HashMap<String, String> {
     config.try_deserialize::<HashMap<String, String>>().unwrap()
 }
 
+=======
+>>>>>>> 546ff34 (move config into internal module)
 #[allow(unused_assignments)]
 fn main() {
     let config = get_config();
