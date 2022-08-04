@@ -21,8 +21,6 @@ when you build the library.
 Conversion from string to CalcType:
 
 ```rust
-use dc-ock::str_to_calc_type;
-
 fn main() {
   let x: CalcType = str_to_calc_type("1").unwrap(); // returns Val(1.)
   let y: CalcType = str_to_calc_type("+").unwrap(); // returns Addition
@@ -34,7 +32,6 @@ fn main() {
 Evaluating expressions safely:
 
 ```rust
-use dc-ock::safe_eval;
 fn main() {
     let expr = "1 2 +";
     match safe_eval(expr) {
