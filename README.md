@@ -7,6 +7,8 @@ In addition to the command-line utility, dc.rs provides library components for o
 
 ## Examples
 
+Conversion from string to CalcType:
+
 ```rust
 use dc-ock::str_to_calc_type;
 
@@ -16,4 +18,17 @@ fn main() {
   let z: CalcType = str_to_calc_type("*").unwrap(); // returns Multiplication
   // and so on.
 }
+```
+
+Evaluating expressions safely:
+
+```rust
+use dc-ock::safe_eval;
+fn main() {
+    let expr = "1 2 +";
+    match safe_eval(expr) {
+        Ok(x) => println!("{:?}", x), // prints [3.0]
+        Err(e) => println!("{}", e),  // prints an error message
+    }
+}  
 ```

@@ -1,12 +1,13 @@
 [package]
 name = "dc-ock"
-version = "0.1.2"
+version = "0.2.0"
 edition = "2018"
 license = "MIT"
+license_file = "LICENSE"
 description = "A simple reverse polish notation desk calculator"
 repository = "https://github.com/lillycat332/dc-rs"
-author = "Lilly Cham"
-author_email = "lilly@lillycat.tech"
+authors = ["Lilly Cham"]
+keywords = ["calculator", "desk calculator", "reverse polish notation", "ock"]
 homepage = "https://haskell.gay"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
