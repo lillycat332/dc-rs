@@ -4,7 +4,7 @@ directories = {version = "4.0.1", optional = true}
 
 [package]
 name = "dc-ock"
-version = "0.3.0"
+version = "1.0.0"
 edition = "2018"
 license = "MIT"
 license_file = "LICENSE"
