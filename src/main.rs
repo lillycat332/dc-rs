@@ -27,7 +27,7 @@ fn main() {
         let mut stk: VecDeque<f64> = VecDeque::new();
         let mut in_str = String::new();
 
-        let mut clos_mutate = |x: &str| eval(x.strip_suffix("\n").unwrap_or(&x), &mut stk);
+        let mut clos_mutate = |x: &str| eval(x.strip_suffix('\n').unwrap_or(x), &mut stk);
 
         match stdin().read_line(&mut in_str) {
             Ok(0) => {

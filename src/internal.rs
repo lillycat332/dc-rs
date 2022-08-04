@@ -21,7 +21,7 @@ pub(super) mod util {
             .open(&config_file);
 
         // If the file WAS created, then we need to write the default config to it.
-        if let Ok(_) = file {
+        if file.is_ok() {
             writeln!(file.as_ref().unwrap(), "prompt = \">>> \"").unwrap();
             std::mem::drop(file);
         } else {

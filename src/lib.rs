@@ -43,7 +43,7 @@ pub fn eval(input: &str, stack: &mut VecDeque<f64>) {
     //// let mut stack = stack_in.clone();
 
     // Split the input into tokens.
-    let toks = input.split(" ").collect::<Vec<&str>>();
+    let toks = input.split(' ').collect::<Vec<&str>>();
     let mut ops: VecDeque<CalcType> = VecDeque::new();
 
     for tok in &toks {
