@@ -1,17 +1,45 @@
-use dc_ock::{
-    str_to_calc_type, CalcType,
-    CalcType::{Add, Divide, Multiply, Power, Print, Subtract, Val},
-};
+use config::Config;
+use dc_ock::eval;
+use directories::ProjectDirs;
+use std::collections::HashMap;
 use std::{
     collections::VecDeque,
     io::{self, stdin, stdout},
     process::exit,
 };
 
+fn get_config() -> HashMap<String, String> {
+    let binding = ProjectDirs::from("com", "lc332", "dc_rs").unwrap();
+    let config_file = format!(
+        "{}{}",
+        binding.config_dir().to_str().unwrap_or("."),
+        "/dc_rs.toml"
+    );
+
+    let config = Config::builder()
+        .add_source(config::File::with_name(&config_file))
+        .add_source(config::Environment::with_prefix("DC_CONF"))
+        .build()
+        .unwrap();
+
+    config.try_deserialize::<HashMap<String, String>>().unwrap()
+}
+
 #[allow(unused_assignments)]
 fn main() {
+    let config = get_config();
+
+    let prompt: String = {
+        let this = config.get("prompt");
+        match this {
+            Some(x) => x,
+            None => ">>> ",
+        }
+    }
+    .to_string();
+
     loop {
-        print!(">> ");
+        print!("{}", prompt);
         io::Write::flush(&mut stdout()).expect("Flush error");
         let mut stk: VecDeque<f64> = VecDeque::new();
         let mut in_str = String::new();
@@ -26,59 +54,4 @@ fn main() {
             Err(e) => println!("Couldn't parse input: {}", e),
         };
     }
-}
-
-fn eval(input: &str, stack: &mut VecDeque<f64>) {
-    //// Create a mutable copy of the inputted stack
-    //// let mut stack = stack_in.clone();
-
-    // Split the input into tokens.
-    let toks = input.split(" ").collect::<Vec<&str>>();
-    let mut ops: VecDeque<CalcType> = VecDeque::new();
-
-    for tok in &toks {
-        let x: CalcType = str_to_calc_type(tok).unwrap();
-
-        match x {
-            Add | Divide | Multiply | Power | Subtract | Print => ops.push_back(x),
-
-            Val(x_) => stack.push_back(x_),
-        }
-    }
-
-    for op in &ops {
-        match op {
-            Add => {
-                let y = &stack.pop_back().unwrap_or(0.0);
-                let x = &stack.pop_back().unwrap_or(0.0);
-                &stack.push_back(x + y)
-            }
-            Subtract => {
-                let y = &stack.pop_back().unwrap_or(0.0);
-                let x = &stack.pop_back().unwrap_or(0.0);
-                &stack.push_back(x - y)
-            }
-            Multiply => {
-                let y = &stack.pop_back().unwrap_or(0.0);
-                let x = &stack.pop_back().unwrap_or(0.0);
-                &stack.push_back(x * y)
-            }
-            Divide => {
-                let y = &stack.pop_back().unwrap_or(0.0);
-                let x = &stack.pop_back().unwrap_or(0.0);
-                &stack.push_back(x / y)
-            }
-            Power => {
-                let y = stack.pop_back().unwrap_or(0.0);
-                let x = stack.pop_back().unwrap_or(0.0);
-
-                let result = x.powf(y);
-                &stack.push_back(result)
-            }
-            Print => &{ println!("{:#?}", stack.iter().last()) },
-            Val(_) => panic!("Unexpected value in the operator stack!"),
-        };
-    }
-
-    println!("{}", stack.iter().last().unwrap_or(&0.0));
 }
