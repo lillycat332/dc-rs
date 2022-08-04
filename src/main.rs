@@ -21,6 +21,7 @@ fn get_config() -> HashMap<String, String> {
     // then load the config and return it.
     let config = Config::builder()
         .add_source(config::File::with_name(&config_file))
+        .add_source(config::Environment::with_prefix("dc_rs"))
         .build()
         .unwrap();
 
