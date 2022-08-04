@@ -12,14 +12,11 @@ use std::{
 fn get_config() -> HashMap<String, String> {
     // Construct the path to the configuration folder
     let binding = ProjectDirs::from("com", "lc332", "dc_rs").unwrap();
-    let config_dir = binding.config_dir().to_str().unwrap_or(".");
-    let config_file = format!("{}/{}", config_dir, "dc_rs.toml");
-
-    // Ensure the actual file and folder exists. We discard the error because
-    // it's pretty likely they'll already exist, and handling the error is sort
-    // of pointless.
-    fs::create_dir_all(config_dir).ok();
-    fs::File::create(&config_file).ok();
+    let config_file = format!(
+        "{}{}",
+        binding.config_dir().to_str().unwrap_or("."),
+        "/dc_rs.toml"
+    );
 
     // then load the config and return it.
     let config = Config::builder()
