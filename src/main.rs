@@ -1,6 +1,6 @@
 mod internal;
 
-use dc_ock::eval;
+use dc_ock::safe_eval_with_stack;
 use internal::util::get_config;
 use std::{
     collections::VecDeque,
@@ -21,20 +21,25 @@ fn main() {
     }
     .to_string();
 
+    let mut stk: VecDeque<f64> = VecDeque::new();
+
     loop {
         print!("{}", prompt);
         io::Write::flush(&mut stdout()).expect("Flush error");
-        let mut stk: VecDeque<f64> = VecDeque::new();
         let mut in_str = String::new();
 
-        let mut clos_mutate = |x: &str| eval(x.strip_suffix('\n').unwrap_or(x), &mut stk);
-
         match stdin().read_line(&mut in_str) {
-            Ok(0) => {
-                exit(0);
+            Ok(0) => exit(0),
+            Ok(_) => (),
+            Err(_) => panic!("Read error"),
+        }
+
+        match safe_eval_with_stack(&in_str.trim(), stk.clone()) {
+            Ok(x) => stk = x,
+            Err(e) => {
+                println!("{}", e);
+                continue;
             }
-            Ok(_) => clos_mutate(&in_str),
-            Err(e) => println!("Couldn't parse input: {}", e),
-        };
+        }
     }
 }

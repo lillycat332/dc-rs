@@ -32,3 +32,17 @@ fn main() {
     }
 }  
 ```
+
+Evaluating expressions with stack persistence:
+
+```rust
+fn main() {
+    let mut stack: VecDeque<f64> = VecDeque::new();
+    stack.push_back(2.);
+    stack.push_back(7.5);
+    stack.push_back(3.5);
+
+    stack = safe_eval_with_stack("+ +", stack).unwrap();
+    println!("{:?}", stack);
+}
+```
