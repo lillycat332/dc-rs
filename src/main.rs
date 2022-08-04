@@ -1,7 +1,7 @@
 mod internal;
 
 use dc_ock::eval;
-use internal::get_config;
+use internal::util::get_config;
 use std::{
     collections::VecDeque,
     io::{self, stdin, stdout},
