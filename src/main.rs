@@ -34,7 +34,7 @@ fn main() {
             Err(_) => panic!("Read error"),
         }
 
-        match safe_eval_with_stack(&in_str.trim(), stk.clone()) {
+        match safe_eval_with_stack(in_str.trim(), stk.clone()) {
             Ok(x) => stk = x,
             Err(e) => {
                 println!("{}", e);

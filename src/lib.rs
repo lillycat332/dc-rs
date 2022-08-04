@@ -242,7 +242,7 @@ pub fn safe_eval_with_stack(
     input: &str,
     initial_stack: VecDeque<f64>,
 ) -> Result<VecDeque<f64>, EvaluationError> {
-    let mut stack = initial_stack.clone();
+    let mut stack = initial_stack;
     // Split the input into tokens.
     let toks = input.split(' ').collect::<Vec<&str>>();
     let mut ops: VecDeque<CalcType> = VecDeque::new();
