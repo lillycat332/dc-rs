@@ -1,25 +1,12 @@
 [dependencies]
-config = {version = "0.13.1", optional = true}
-directories = {version = "4.0.1", optional = true}
 
 [package]
 name = "dc-ock"
-version = "1.0.0"
+version = "2.0.0"
 edition = "2018"
 license = "MIT"
 license_file = "LICENSE"
-description = "A simple reverse polish notation desk calculator"
+description = "A simple reverse polish notation desk calculator library"
 repository = "https://github.com/lillycat332/dc-rs"
 authors = ["Lilly Cham"]
 homepage = "https://haskell.gay"
-
-[lib]
-name = "dc_ock"
-
-
-[features]
-bbin = ["config", "directories"]
-
-[[bin]]
-name = "dc-cli"
-required_features = ["bbin"]

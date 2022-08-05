@@ -1,9 +1,10 @@
 # dc.rs
 
-dc.rs (also dc-ock, for the Open Computing Kit) is a reverse Polish notation (postfix) calculator, roughly akin to the unix "dc" command, written in Rust.
+dc.rs (also dc-ock, for the Open Computing Kit) is a reverse Polish notation (postfix) calculator library,
+providing backend functionality roughly akin to the unix "dc" command, written in Rust.
 It lacks many of the more advanced features of dc, but still has core mathematical operations needed for most simple usage.
 
-In addition to the command-line utility, dc.rs provides library components for other programs to use, including the RPN evaluator, the types and utility functions for said types.
+There is a [`command line utility`](https://crates.io/crates/dc-cli) available built on this library.
 
 ## Building dc.rs
 
