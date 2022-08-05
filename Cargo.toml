@@ -2,7 +2,7 @@
 
 [package]
 name = "dc-ock"
-version = "2.0.0"
+version = "2.0.1"
 edition = "2018"
 license = "MIT"
 license_file = "LICENSE"

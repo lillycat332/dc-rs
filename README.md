@@ -4,7 +4,7 @@ dc.rs (also dc-ock, for the Open Computing Kit) is a reverse Polish notation (po
 providing backend functionality roughly akin to the unix "dc" command, written in Rust.
 It lacks many of the more advanced features of dc, but still has core mathematical operations needed for most simple usage.
 
-There is a [`command line utility`](https://crates.io/crates/dc-cli) available built on this library.
+There is a [*command line utility*](https://crates.io/crates/dc-cli) available built on this library.
 
 ## Building dc.rs
 
